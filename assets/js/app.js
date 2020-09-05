@@ -16,6 +16,7 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
+import "alpinejs"
 import "typeface-inter"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
