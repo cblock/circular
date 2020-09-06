@@ -7,20 +7,21 @@ defmodule CircularWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {CircularWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :lp do
+    plug :put_root_layout, {CircularWeb.LayoutView, :lp_root}
   end
 
-  scope "/", CircularWeb do
-    pipe_through :browser
+  pipeline :app do
+    plug :put_root_layout, {CircularWeb.LayoutView, :app_root}
+  end
 
-    live "/", PageLive, :index
+  pipeline :api do
+    plug :accepts, ["json"]
   end
 
   # Other scopes may use custom stacks.
@@ -47,7 +48,7 @@ defmodule CircularWeb.Router do
   ## Authentication routes
 
   scope "/", CircularWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [:browser, :lp, :redirect_if_user_is_authenticated]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
@@ -60,7 +61,7 @@ defmodule CircularWeb.Router do
   end
 
   scope "/", CircularWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser, :app, :require_authenticated_user]
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings/update_password", UserSettingsController, :update_password
@@ -69,7 +70,9 @@ defmodule CircularWeb.Router do
   end
 
   scope "/", CircularWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :lp]
+
+    live "/", PageLive, :index
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
