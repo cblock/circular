@@ -31,7 +31,8 @@ defmodule CircularWeb do
     quote do
       use Phoenix.View,
         root: "lib/circular_web/templates",
-        namespace: CircularWeb
+        namespace: CircularWeb,
+        pattern: "**/*"
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -88,6 +89,7 @@ defmodule CircularWeb do
       import Phoenix.View
 
       import CircularWeb.ErrorHelpers
+      import CircularWeb.InputHelpers
       import CircularWeb.Gettext
       alias CircularWeb.Router.Helpers, as: Routes
     end
