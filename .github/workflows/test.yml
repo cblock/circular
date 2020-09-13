@@ -1,68 +1,49 @@
-name: Elixir CI
+name: Test
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-env:
-  MIX_ENV: test
+on: push
 
 jobs:
-  test:
+ test:
+   runs-on: ubuntu-latest
+   services:
+     postgres:
+       image: postgres:12
+       env:
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: postgres
+         POSTGRES_DB: circular_test
+       ports:
+       - 5432:5432
+       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+   env:
+     MIX_ENV: test
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   steps:
+     - uses: actions/checkout@v2
+     - uses: actions/setup-elixir@v1.0.0
+       with:
+         otp-version: 23.0.2
+         elixir-version: 1.10.4
+     - uses: actions/cache@v1
+       with:
+         path: deps
+         key: ${{ runner.os }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
+         restore-keys: |
+           ${{ runner.os }}-mix-
+     - uses: actions/setup-node@v1
+       with:
+         node-version: '10.x'
+     - uses: nanasess/setup-chromedriver@master
+       with:
+         chromedriver-version: '79.0.3945.36'
+     - run: |
+         export DISPLAY=:99
+         chromedriver --url-base=/wd/hub &
+         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
 
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        elixir: [1.7.4]
-        otp: [23.0.2]
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Setup elixir
-      uses: actions/setup-elixir@v1
-      with:
-        elixir-version: ${{ matrix.elixir }} # Define the elixir version [required]
-        otp-version: ${{ matrix.otp }} # Define the OTP version [required]
-
-    - name: Retrieve Mix Dependencies Cache
-      uses: actions/cache@v1
-      id: mix-cache #id to use in retrieve action
-      with:
-        path: deps
-        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-
-    - name: Install Mix Dependencies
-      if: steps.mix-cache.outputs.cache-hit != 'true'
-      run: |
-        mix local.rebar --force
-        mix local.hex --force
-        mix deps.get
-
-    - name: Check Formatting
-      run: mix format --check-formatted
-
-    - name: Run Credo
-      run: mix credo --strict
-
-    - name: Run Tests
-      run: mix test
-
-    - name: Retrieve PLT Cache
-      uses: actions/cache@v1
-      id: plt-cache
-      with:
-        path: priv/plts
-        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-plts-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-
-    - name: Create PLTs
-      if: steps.plt-cache.outputs.cache-hit != 'true'
-      run: |
-        mkdir -p priv/plts
-        mix dialyzer --plt
-
-    - name: Run dialyzer
-      run: mix dialyzer --no-check --halt-exit-status
+     - run: mix local.rebar --force
+     - run: mix local.hex --force
+     - run: mix deps.get
+     - run: npm install --prefix assets
+     - run: npm run deploy --prefix assets
+     - run: mix test
