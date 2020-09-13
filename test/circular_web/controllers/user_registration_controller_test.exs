@@ -32,11 +32,11 @@ defmodule CircularWeb.UserRegistrationControllerTest do
       assert redirected_to(conn) =~ "/"
 
       # Now do a logged in request and assert on the menu
-      conn = get(conn, "/")
+      conn = get(conn, "/users/settings")
       response = html_response(conn, 200)
       assert response =~ email
-      assert response =~ "Settings</a>"
-      assert response =~ "Log out</a>"
+      assert response =~ "Settings"
+      assert response =~ "Sign out</a>"
     end
 
     test "render errors for invalid data", %{conn: conn} do
