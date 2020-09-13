@@ -11,9 +11,9 @@ defmodule CircularWeb.UserSessionControllerTest do
     test "renders log in page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
-      assert response =~ "Log in</a>"
-      assert response =~ "Register</a>"
+      assert response =~ "Sign in to your account"
+      assert response =~ "Forgot your password?</a>"
+      assert response =~ "register for free</a>"
     end
 
     test "redirects if already logged in", %{conn: conn, user: user} do
@@ -61,7 +61,7 @@ defmodule CircularWeb.UserSessionControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
+      assert response =~ "Sign in to your account"
       assert response =~ "Invalid e-mail or password"
     end
   end
