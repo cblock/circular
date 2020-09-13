@@ -55,9 +55,9 @@ jobs:
 
       - name: Run sobelow
         run: mix sobelow --ignore Config.HTTPS --exit --details
-        
+
       - name: Run Credo
-        run: mix credo --strict
+        run: mix credo
 
       - name: Retrieve PLT Cache
         uses: actions/cache@v1
