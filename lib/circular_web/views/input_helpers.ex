@@ -82,7 +82,7 @@ defmodule CircularWeb.InputHelpers do
         end
 
       error = CircularWeb.ErrorHelpers.error_tag(form, field)
-      [label, input, error || ""]
+      [label, input, error]
     end
   end
 
