@@ -54,7 +54,7 @@ jobs:
         run: mix format --check-formatted
 
       - name: Run sobelow
-        run: mix sobelow --ignore Config.HTTPS --exit --details
+        run: mix sobelow --ignore Config.HTTPS,Config.CSP --exit --details
 
       - name: Run Credo
         run: mix credo
