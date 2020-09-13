@@ -1,4 +1,5 @@
 defmodule CircularWeb.Telemetry do
+  @moduledoc false
   use Supervisor
   import Telemetry.Metrics
 

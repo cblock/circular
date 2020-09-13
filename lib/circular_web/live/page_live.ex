@@ -1,4 +1,5 @@
 defmodule CircularWeb.PageLive do
+  @moduledoc false
   use CircularWeb, :live_view
 
   @impl true
