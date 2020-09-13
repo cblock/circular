@@ -19,7 +19,7 @@
           <% end %>
           <p class="mt-6 text-sm leading-5 text-gray-600 max-w">
             Or
-            <%= link "sign in to your existing account", to: Routes.user_session_path(@conn, :new), class: class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
+            <%= link "sign in to your existing account", to: Routes.user_session_path(@conn, :new), class: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150" %>
           </p>
         </div>
       </div>
