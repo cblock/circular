@@ -11,7 +11,7 @@ defmodule Circular.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      dialyzer: [plt_add_deps: :app_tree],
+      dialyzer: dialyzer(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         coveralls: :test,
@@ -35,6 +35,15 @@ defmodule Circular.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  # Cache dialyzer plt files
+  defp dialyzer do
+    [
+      plt_add_deps: :app_tree,
+      plt_core_path: "priv/plts",
+      plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+    ]
+  end
 
   # Specifies your project dependencies.
   #
