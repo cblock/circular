@@ -7,9 +7,9 @@ defmodule CircularWeb.UserRegistrationControllerTest do
     test "renders registration page", %{conn: conn} do
       conn = get(conn, Routes.user_registration_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
-      assert response =~ "Log in</a>"
-      assert response =~ "Register</a>"
+      assert response =~ "Register a new account</h2>"
+      assert response =~ "sign in to your existing account</a>"
+      assert response =~ "Register</button>"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -46,7 +46,7 @@ defmodule CircularWeb.UserRegistrationControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
+      assert response =~ "Register a new account</h2>"
       assert response =~ "must have the @ sign and no spaces"
       assert response =~ "at least one digit or punctuation character"
     end
