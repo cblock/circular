@@ -62,7 +62,10 @@ defmodule Circular.AccountsTest do
 
       assert %{
                email: ["must have the @ sign and no spaces"],
-               password: ["at least one digit or punctuation character", "at least one upper case character"]
+               password: [
+                 "at least one digit or punctuation character",
+                 "at least one upper case character"
+               ]
              } = errors_on(changeset)
     end
 
@@ -239,7 +242,10 @@ defmodule Circular.AccountsTest do
         })
 
       assert %{
-               password: ["at least one digit or punctuation character", "at least one upper case character"],
+               password: [
+                 "at least one digit or punctuation character",
+                 "at least one upper case character"
+               ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
     end
@@ -448,7 +454,10 @@ defmodule Circular.AccountsTest do
         })
 
       assert %{
-               password: ["at least one digit or punctuation character", "at least one upper case character"],
+               password: [
+                 "at least one digit or punctuation character",
+                 "at least one upper case character"
+               ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
     end

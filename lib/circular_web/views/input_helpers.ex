@@ -16,7 +16,6 @@ defmodule CircularWeb.InputHelpers do
 
   use Phoenix.HTML
 
-
   @doc """
     Generates and input form field with accompanying label (and maybe) error description wrapped in
     tailwind-ui formatted div tags
@@ -58,23 +57,30 @@ defmodule CircularWeb.InputHelpers do
   def input(form, field, opts \\ []) do
     type = opts[:using] || Phoenix.HTML.Form.input_type(form, field)
 
-    group_wrapper_opts = Keyword.get(opts, :group_wrapper_opts, [])
+    group_wrapper_opts =
+      Keyword.get(opts, :group_wrapper_opts, [])
       |> Keyword.put_new(:class, "mt-6")
 
-    label_opts = Keyword.get(opts, :label_opts, [])
+    label_opts =
+      Keyword.get(opts, :label_opts, [])
       |> Keyword.put_new(:class, "block text-sm font-medium leading-5 text-gray-700")
 
-    input_wrapper_opts = Keyword.get(opts, :input_wrapper_opts, [])
+    input_wrapper_opts =
+      Keyword.get(opts, :input_wrapper_opts, [])
       |> Keyword.put_new(:class, "mt-1 rounded-md shadow-sm")
 
-    input_opts = Keyword.get(opts, :input_opts, [])
+    input_opts =
+      Keyword.get(opts, :input_opts, [])
       |> Keyword.put_new(:class, calc_input_opts_class_for(form.errors[field]))
 
     content_tag :div, group_wrapper_opts do
       label = label(form, field, humanize(field), label_opts)
-      input = content_tag :div, input_wrapper_opts do
-        input(type, form, field, input_opts)
-      end
+
+      input =
+        content_tag :div, input_wrapper_opts do
+          input(type, form, field, input_opts)
+        end
+
       error = CircularWeb.ErrorHelpers.error_tag(form, field)
       [label, input, error || ""]
     end
@@ -83,6 +89,7 @@ defmodule CircularWeb.InputHelpers do
   defp calc_input_opts_class_for(nil) do
     "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
   end
+
   defp calc_input_opts_class_for(_) do
     "form-input block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red sm:text-sm sm:leading-5"
   end
