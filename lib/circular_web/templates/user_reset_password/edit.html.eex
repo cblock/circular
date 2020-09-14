@@ -1,26 +1,43 @@
-<h1>Reset password</h1>
-
-<%= form_for @changeset, Routes.user_reset_password_path(@conn, :update, @token), fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
-
-  <%= label f, :password, "New password" %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
-  <%= label f, :password_confirmation, "Confirm new password" %>
-  <%= password_input f, :password_confirmation, required: true %>
-  <%= error_tag f, :password_confirmation %>
-
-  <div>
-    <%= submit "Reset password" %>
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg" alt="Workflow">
+    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+      Reset password
+    </h2>
   </div>
-<% end %>
 
-<p>
-  <%= link "Register", to: Routes.user_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
-</p>
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <%= form_for @changeset, Routes.user_reset_password_path(@conn, :update, @token), fn f -> %>
+        <%= if @changeset.action do %>
+          <div class="bg-red-50 border-l-4 border-red-400 p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm leading-5 text-red-700">
+                    Oops, something went wrong! Please check the errors below.
+                  </p>
+                </div>
+              </div>
+            </div>
+        <% end %>
+        <%= input f, :password, input_opts: [required: true] %>
+        <%= input f, :password_confirmation, input_opts: [required: true] %>
+        <div class="mt-6">
+          <span class="block w-full rounded-md shadow-sm">
+            <%= submit "Reset password", class: "btn" %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
+    <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "link" %> |
+    <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "link" %>
+  </p>
+</div>
