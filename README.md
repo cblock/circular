@@ -1,5 +1,8 @@
 # Circular
 
+![CI Status](https://github.com/cblock/circular/workflows/Test/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/cblock/circular/badge.svg?branch=master)](https://coveralls.io/github/cblock/circular?branch=master)
+
 Circular is a web app aimed at facilitating self-organization and shared decision making within organizations. 
 It does so by helping people organize their ideas and share them with others in a way that gently nudges them into systems thinking and decision making inspired by sociocratic principles.
 

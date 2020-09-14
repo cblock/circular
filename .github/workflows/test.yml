@@ -58,7 +58,7 @@ jobs:
           chromedriver --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
 
-      - name: Install Dependencies
+      - name: Install and compile dependencies
         run: |
           mix local.rebar --force
           mix local.hex --force
@@ -77,7 +77,7 @@ jobs:
       - name: Run Credo
         run: mix credo
 
-      - name: Retrieve PLT Cache
+      - name: Get PLT Cache
         uses: actions/cache@v1
         id: plt-cache
         with:
