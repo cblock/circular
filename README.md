@@ -7,8 +7,8 @@ Circular is a web app aimed at facilitating self-organization and shared decisio
 It does so by helping people organize their ideas and share them with others in a way that gently nudges them into systems thinking and decision making inspired by sociocratic principles.
 
 Why the name _circular_?
-  # It is an acknowledgement to the circle way methodology as a means of facilitating group communication.
-  # One of the corner stones of systems theory is the assumption that autopoietic systems are best described by their cylcic / circular dependencies
+  1. It is an acknowledgement to the circle way methodology as a means of facilitating group communication.
+  2. One of the corner stones of systems theory is the assumption that autopoietic systems are best described by their cylcic / circular dependencies
 
 
 Getting startet
