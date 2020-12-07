@@ -62,7 +62,7 @@
               x-transition:leave-end="transform opacity-0 scale-95"
               class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
             >
-              <div class="py-1 rounded-md bg-white shadow-xs">
+              <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5">
                 <%= link "Your Profile", to: Routes.user_settings_path(@conn, :edit), class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" %>
                 <%= link "Sign out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" %>
               </div>

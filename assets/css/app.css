@@ -21,7 +21,7 @@
     @apply bg-indigo-500
   }
   .btn:focus {
-    @apply outline-none border-indigo-700 shadow-outline-indigo
+    @apply outline-none border-indigo-700 ring-indigo-700
   }
   .btn:active {
     @apply bg-indigo-700

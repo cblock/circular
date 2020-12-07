@@ -6,7 +6,7 @@ defmodule CircularWeb.InputHelpers do
 
   <div class="mt-6"><label class="block text-sm font-medium leading-5 text-gray-700" for="user_email">Email</label>
     <div class="mt-1 rounded-md shadow-sm"><input
-            class="form-input block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red sm:text-sm sm:leading-5"
+            class="form-input block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red-300 sm:text-sm sm:leading-5"
             id="user_email" name="user[email]" type="email" value=""></div>
     <p class="mt-1 text-xs text-red-600" phx-feedback-for="user_email">can't be blank</p>
   </div>
@@ -44,10 +44,10 @@ defmodule CircularWeb.InputHelpers do
 
         # Assuming form contains a User schema
         input(form, :email)
-        #=> <div class="mt-6"><label class="block text-sm font-medium leading-5 text-gray-700" for="user_email">Email</label><div class="mt-1 rounded-md shadow-sm"><input class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" id="user_email" name="user[email]" type="email"></div></div>
+        #=> <div class="mt-6"><label class="block text-sm font-medium leading-5 text-gray-700" for="user_email">Email</label><div class="mt-1 rounded-md shadow-sm"><input class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-300 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" id="user_email" name="user[email]" type="email"></div></div>
 
         text_input(:user, :email)
-        #=> <div class="mt-6"><label class="block text-sm font-medium leading-5 text-gray-700" for="user_email">Email</label><div class="mt-1 rounded-md shadow-sm"><input class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" id="user_email" name="user[email]" type="email"></div></div>
+        #=> <div class="mt-6"><label class="block text-sm font-medium leading-5 text-gray-700" for="user_email">Email</label><div class="mt-1 rounded-md shadow-sm"><input class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-300 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" id="user_email" name="user[email]" type="email"></div></div>
 
         text_input(:user, :email, [group_wrapper_opts: [class: "group", id: "specific"], label_opts: [class: "label"], imput_wrapper_opts: [class: "input_wrapper"], input_opts: [class: "input"]])
         #=> <div id="specific" class="group"><label class="label" for="user_email">Email</label><div class="input_wrapper"><input class="input" id="user_email" name="user[email]" type="email"></div></div>
@@ -87,11 +87,11 @@ defmodule CircularWeb.InputHelpers do
   end
 
   defp calc_input_opts_class_for(nil) do
-    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+    "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-300 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
   end
 
   defp calc_input_opts_class_for(_) do
-    "form-input block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red sm:text-sm sm:leading-5"
+    "form-input block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red-300 sm:text-sm sm:leading-5"
   end
 
   # Implement clauses below for custom inputs.

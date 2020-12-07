@@ -55,7 +55,7 @@ defmodule CircularWeb.InputHelpersTest do
     response = Phoenix.HTML.safe_to_string(InputHelpers.input(generate_form(), :foo, opts))
 
     assert response =~
-             "<input class=\"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5\" id=\"custom_id\" name=\"custom_name\" type=\"text\">"
+             "<input class=\"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-300 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5\" id=\"custom_id\" name=\"custom_name\" type=\"text\">"
   end
 
   test "renders a form field using custom input type" do
@@ -65,6 +65,6 @@ defmodule CircularWeb.InputHelpersTest do
       )
 
     assert response =~
-             "<input class=\"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5\" id=\"foo_foo\" name=\"foo[foo]\" type=\"password\">"
+             "<input class=\"appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-300 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5\" id=\"foo_foo\" name=\"foo[foo]\" type=\"password\">"
   end
 end
